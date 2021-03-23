@@ -16,6 +16,9 @@ jobs: # a basic unit of work in a run
       - run:
           name: Compress app for storage
           command: zip -r app.zip build/Release/circleci-demo-macos.app
+      - run:
+          name: Version Check
+          command: sw_vers
       - store_artifacts:
           path: app.zip
           destination: app
