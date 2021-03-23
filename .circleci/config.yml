@@ -1,4 +1,4 @@
-version: 2 # use version 2.0 of CircleCI
+version: 2.1
 jobs: # a basic unit of work in a run
   test-build:
     macos: # indicate that we are using the macOS executor
@@ -19,6 +19,7 @@ jobs: # a basic unit of work in a run
       - store_artifacts:
           path: app.zip
           destination: app
+
 workflows:
   test-build-store:
     jobs:
