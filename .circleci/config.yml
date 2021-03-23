@@ -1,8 +1,8 @@
 version: 2 # use version 2.0 of CircleCI
 jobs: # a basic unit of work in a run
-  build: # runs not using `Workflows` must have a `build` job as entry point
-    macos:  # indicate that we are using the macOS executor
-      xcode: "10.0.0" # indicate our selected version of Xcode
+  test-build:
+    macos: # indicate that we are using the macOS executor
+      xcode: "12.3.0" # indicate our selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
       - run:
@@ -19,3 +19,7 @@ jobs: # a basic unit of work in a run
       - store_artifacts:
           path: app.zip
           destination: app
+workflows:
+  test-build-store:
+    jobs:
+      - test-build
