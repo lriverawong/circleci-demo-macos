@@ -20,6 +20,9 @@ jobs: # a basic unit of work in a run
       - run:
           name: Version Check
           command: sw_vers
+      - run:
+          name: Check IP
+          shell: ifconfig | grep 'inet '
       - store_artifacts:
           path: app.zip
           destination: app
