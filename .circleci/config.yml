@@ -23,6 +23,9 @@ jobs: # a basic unit of work in a run
       - run:
           name: Check IP
           command: ifconfig | grep 'inet '
+      - run: 
+          name: Xcode Version
+          command: xcodebuild -version
       - store_artifacts:
           path: app.zip
           destination: app
