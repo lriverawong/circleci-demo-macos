@@ -1,11 +1,39 @@
 version: 2.1
-jobs: # a basic unit of work in a run
-  test-build:
-    macos: # indicate that we are using the macOS executor
-      xcode: "110.12.4" # indicate our selected version of Xcode
-    resource_class: m2.medium
+
+commands:
+  test-brew:
+    steps:
+      - checkout
+      - run:
+          name: Check brew
+          command: which brew
+      - run: 
+          name: Brew version
+          command: brew -v
+      # - run: 
+      #     name: Install packer packages
+      #     command: brew tap hashicorp/tap && brew install hashicorp/tap/packer
+      # - run:
+      #     name: Install homebrew packages
+      #     command: brew install tldr tree
+      # - run:
+      #     name: Brew update
+      #     command: brew update -v
+      - run:
+          name: Version Check
+          command: sw_vers
+      - run:
+          name: Check IP
+          command: ifconfig | grep 'inet '
+      - run: 
+          name: Xcode Version
+          command: xcodebuild -version
+      - run:
+          name: VMware Tools CLI
+          command: /Library/Application\ Support/VMware\ Tools/vmware-tools-cli -v
+  test-xcode-build:
     steps: # a series of commands to run
-      - checkout  # pull down code from your version control system.
+      - checkout
       - run:
           # run our tests using xcode's cli tool `xcodebuild`
           name: Run Unit Tests
@@ -29,8 +57,24 @@ jobs: # a basic unit of work in a run
       - store_artifacts:
           path: app.zip
           destination: app
+jobs:
+  preview-tester-12-5:
+    macos:
+      xcode: "0.0.125"
+    resource_class: m2.medium
+    steps: 
+      - test-brew
+      - test-xcode-build
+  brew-12-2:
+    macos:
+      xcode: "12.2.0"
+    resource_class: medium
+    steps:
+      - test-brew
+      - test-xcode-build
 
 workflows:
-  test-build-store:
+  test-images:
     jobs:
-      - test-build
+      # - preview-tester-12-5
+      - brew-12-2
