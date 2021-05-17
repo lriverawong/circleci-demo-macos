@@ -60,7 +60,7 @@ commands:
 jobs:
   preview-tester-12-5:
     macos:
-      xcode: "0.0.125"
+      xcode: "12.5"
     resource_class: m2.medium
     steps: 
       - test-brew
@@ -90,7 +90,7 @@ jobs:
 workflows:
   test-images:
     jobs:
-      # - preview-tester-12-5
+      - preview-tester-12-5
       - brew-12-2
       - brew-12-0-1
       - brew-12-1-1
