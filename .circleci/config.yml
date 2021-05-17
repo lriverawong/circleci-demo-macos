@@ -58,10 +58,17 @@ commands:
           path: app.zip
           destination: app
 jobs:
-  preview-tester-12-5:
+  preview-tester-12-5-m:
     macos:
       xcode: "12.5.0"
     resource_class: m2.medium
+    steps: 
+      - test-brew
+      - test-xcode-build
+  preview-tester-12-5-l:
+    macos:
+      xcode: "12.5.0"
+    resource_class: m2.large
     steps: 
       - test-brew
       - test-xcode-build
@@ -90,7 +97,8 @@ jobs:
 workflows:
   test-images:
     jobs:
-      - preview-tester-12-5
+      - preview-tester-12-5-m
+      - preview-tester-12-5-l
       - brew-12-2
       - brew-12-0-1
       - brew-12-1-1
