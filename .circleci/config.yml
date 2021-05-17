@@ -60,7 +60,7 @@ commands:
 jobs:
   preview-tester-12-5:
     macos:
-      xcode: "12.5"
+      xcode: "12.5.0"
     resource_class: m2.medium
     steps: 
       - test-brew
