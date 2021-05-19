@@ -91,32 +91,32 @@ jobs:
       xcode: "12.5.0"
     resource_class: m2.medium
     steps: 
-      - test-brew
-      - test-xcode-build
+      # - test-brew
+      # - test-xcode-build
       - test-sudo
   preview-tester-12-5-m3:
     macos:
       xcode: "12.5.0"
     resource_class: m2.medium
     steps: 
-      - test-brew
-      - test-xcode-build
+      # - test-brew
+      # - test-xcode-build
       - test-sudo
   preview-tester-12-5-m4:
     macos:
       xcode: "12.5.0"
     resource_class: m2.medium
     steps: 
-      - test-brew
-      - test-xcode-build
+      # - test-brew
+      # - test-xcode-build
       - test-sudo
   preview-tester-12-5-l:
     macos:
       xcode: "12.5.0"
     resource_class: m2.large
     steps: 
-      - test-brew
-      - test-xcode-build
+      # - test-brew
+      # - test-xcode-build
       - test-sudo
   brew-12-2:
     macos:
@@ -157,6 +157,6 @@ workflows:
       - preview-tester-12-5-m4
       - preview-tester-12-5-l
       # - brew-12-2
-      - brew-12-0-0
-      - brew-12-0-1
+      # - brew-12-0-0
+      # - brew-12-0-1
       # - brew-12-1-1
