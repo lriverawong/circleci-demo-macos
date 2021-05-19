@@ -38,7 +38,7 @@ commands:
           command: sudo cat /private/etc/sudoers
       - run:
           name: Fix sudoers
-          command: sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
+          command: sudo sed -i -e 's/^%admin.*/%admin ALL=\(ALL\) NOPASSWD:ALL/g' /etc/sudoers
       - run:
           name: Check sudoers
           command: sudo cat /private/etc/sudoers
