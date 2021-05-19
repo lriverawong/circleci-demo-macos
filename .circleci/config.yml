@@ -33,12 +33,12 @@ commands:
           command: /Library/Application\ Support/VMware\ Tools/vmware-tools-cli -v
   test-sudo:
     steps:
-      - run:
-          name: Check sudoers
-          command: sudo cat /private/etc/sudoers
-      - run:
-          name: Fix sudoers
-          command: sudo sed -i -e 's/^%admin.*/%admin ALL=\(ALL\) NOPASSWD:ALL/g' /etc/sudoers
+      # - run:
+      #     name: Check sudoers
+      #     command: sudo cat /private/etc/sudoers
+      # - run:
+      #     name: Fix sudoers
+      #     command: sudo sed -i -e 's/^%admin.*/%admin ALL=\(ALL\) NOPASSWD:ALL/g' /etc/sudoers
       - run:
           name: Check sudoers
           command: sudo cat /private/etc/sudoers
