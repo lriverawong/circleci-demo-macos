@@ -31,12 +31,20 @@ commands:
       - run:
           name: VMware Tools CLI
           command: /Library/Application\ Support/VMware\ Tools/vmware-tools-cli -v
-      # - run: 
-      #     name: sudo Test
-      #     command: sudo -v
+  test-sudo:
+    steps:
       - run:
           name: Check sudoers
-          command: sudo cat /private/etc/sudoers && sudo cat /private/etc/sudoers.d/distiller
+          command: sudo cat /private/etc/sudoers
+      - run:
+          name: Fix sudoers
+          command: sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
+      - run:
+          name: Check sudoers
+          command: sudo cat /private/etc/sudoers
+      - run: 
+          name: sudo Test
+          command: sudo -v
       # - run:
       #     name: Certificate download
       #     command: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
@@ -77,6 +85,7 @@ jobs:
     steps: 
       - test-brew
       - test-xcode-build
+      - test-sudo
   preview-tester-12-5-m2:
     macos:
       xcode: "12.5.0"
@@ -84,6 +93,7 @@ jobs:
     steps: 
       - test-brew
       - test-xcode-build
+      - test-sudo
   preview-tester-12-5-m3:
     macos:
       xcode: "12.5.0"
@@ -91,6 +101,7 @@ jobs:
     steps: 
       - test-brew
       - test-xcode-build
+      - test-sudo
   preview-tester-12-5-m4:
     macos:
       xcode: "12.5.0"
@@ -98,6 +109,7 @@ jobs:
     steps: 
       - test-brew
       - test-xcode-build
+      - test-sudo
   preview-tester-12-5-l:
     macos:
       xcode: "12.5.0"
@@ -105,6 +117,7 @@ jobs:
     steps: 
       - test-brew
       - test-xcode-build
+      - test-sudo
   brew-12-2:
     macos:
       xcode: "12.2.0"
@@ -114,6 +127,14 @@ jobs:
       - test-xcode-build
   brew-12-0-1:
     macos:
+      xcode: "12.0.1" # Should be aliased to 12.0.1
+    # xcode: "0.0.393" # Should be aliased to 12.0.1
+    resource_class: medium
+    steps:
+      - test-brew
+      - test-xcode-build
+  brew-12-0-0:
+    macos:
       xcode: "12.0.0" # Should be aliased to 12.0.1
     resource_class: medium
     steps:
@@ -121,8 +142,7 @@ jobs:
       - test-xcode-build
   brew-12-1-1:
     macos:
-      # xcode: "12.1.0" # Should be aliased to 12.1.1
-      xcode: "0.0.393" # Should be aliased to 12.1.1
+      xcode: "12.1.0" # Should be aliased to 12.1.1
     resource_class: medium
     steps:
       - test-brew
@@ -136,6 +156,7 @@ workflows:
       - preview-tester-12-5-m3
       - preview-tester-12-5-m4
       - preview-tester-12-5-l
-      - brew-12-2
+      # - brew-12-2
+      - brew-12-0-0
       - brew-12-0-1
-      - brew-12-1-1
+      # - brew-12-1-1
