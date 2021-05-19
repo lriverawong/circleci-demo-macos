@@ -45,12 +45,12 @@ commands:
       - run: 
           name: sudo Test
           command: sudo -v
-      - run:
-          name: Certificate download
-          command: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
-      - run:
-          name: Add to keychain
-          command: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
+      # - run:
+      #     name: Certificate download
+      #     command: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
+      # - run:
+      #     name: Add to keychain
+      #     command: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
   test-xcode-build:
     steps: # a series of commands to run
       - checkout
