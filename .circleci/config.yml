@@ -91,6 +91,13 @@ jobs:
     steps: 
       - test-brew
       - test-xcode-build
+  preview-tester-12-5-m4:
+    macos:
+      xcode: "12.5.0"
+    resource_class: m2.medium
+    steps: 
+      - test-brew
+      - test-xcode-build
   preview-tester-12-5-l:
     macos:
       xcode: "12.5.0"
@@ -126,6 +133,7 @@ workflows:
       - preview-tester-12-5-m
       - preview-tester-12-5-m2
       - preview-tester-12-5-m3
+      - preview-tester-12-5-m4
       - preview-tester-12-5-l
       - brew-12-2
       - brew-12-0-1
