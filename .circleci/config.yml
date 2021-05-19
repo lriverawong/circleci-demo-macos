@@ -121,7 +121,8 @@ jobs:
       - test-xcode-build
   brew-12-1-1:
     macos:
-      xcode: "12.1.0" # Should be aliased to 12.1.1
+      # xcode: "12.1.0" # Should be aliased to 12.1.1
+      xcode: "0.0.393" # Should be aliased to 12.1.1
     resource_class: medium
     steps:
       - test-brew
