@@ -31,18 +31,18 @@ commands:
       - run:
           name: VMware Tools CLI
           command: /Library/Application\ Support/VMware\ Tools/vmware-tools-cli -v
-      - run: 
-          name: sudo Test
-          command: sudo -v
-      - run:
-          name: Check sudoers
-          command: sudo cat /private/etc/sudoers
-      - run:
-          name: Certificate download
-          command: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
-      - run:
-          name: Add to keychain
-          command: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
+      # - run: 
+      #     name: sudo Test
+      #     command: sudo -v
+      # - run:
+      #     name: Check sudoers
+      #     command: sudo cat /private/etc/sudoers && sudo cat /private/etc/sudoers.d/distiller
+      # - run:
+      #     name: Certificate download
+      #     command: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
+      # - run:
+      #     name: Add to keychain
+      #     command: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
   test-xcode-build:
     steps: # a series of commands to run
       - checkout
@@ -71,6 +71,20 @@ commands:
           destination: app
 jobs:
   preview-tester-12-5-m:
+    macos:
+      xcode: "12.5.0"
+    resource_class: m2.medium
+    steps: 
+      - test-brew
+      - test-xcode-build
+  preview-tester-12-5-m2:
+    macos:
+      xcode: "12.5.0"
+    resource_class: m2.medium
+    steps: 
+      - test-brew
+      - test-xcode-build
+  preview-tester-12-5-m3:
     macos:
       xcode: "12.5.0"
     resource_class: m2.medium
@@ -110,6 +124,8 @@ workflows:
   test-images:
     jobs:
       - preview-tester-12-5-m
+      - preview-tester-12-5-m2
+      - preview-tester-12-5-m3
       - preview-tester-12-5-l
       - brew-12-2
       - brew-12-0-1
