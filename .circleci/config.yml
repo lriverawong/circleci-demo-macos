@@ -77,15 +77,24 @@ commands:
       - store_artifacts:
           path: app.zip
           destination: app
+  test-cocoapod:
+    steps:
+      - run:
+          name: Check dir
+          command: ls -la ~/.cocoapods/
+      - run:
+          name: Check config
+          command: cat ~/.cocoapods/config.yaml
 jobs:
-  preview-tester-12-5-m:
+  preview-tester-110-12-4-m:
     macos:
-      xcode: "12.5.0"
+      xcode: "110.12.4"
     resource_class: m2.medium
     steps: 
       # - test-brew
       # - test-xcode-build
       - test-sudo
+      - test-cocoapod
   preview-tester-12-5-m2:
     macos:
       xcode: "12.5.0"
@@ -94,6 +103,7 @@ jobs:
       # - test-brew
       # - test-xcode-build
       - test-sudo
+      - test-cocoapod
   preview-tester-12-5-m3:
     macos:
       xcode: "12.5.0"
@@ -102,6 +112,7 @@ jobs:
       # - test-brew
       # - test-xcode-build
       - test-sudo
+      - test-cocoapod
   preview-tester-12-5-m4:
     macos:
       xcode: "12.5.0"
@@ -110,6 +121,7 @@ jobs:
       # - test-brew
       # - test-xcode-build
       - test-sudo
+      - test-cocoapod
   preview-tester-12-5-l:
     macos:
       xcode: "12.5.0"
@@ -118,6 +130,7 @@ jobs:
       # - test-brew
       # - test-xcode-build
       - test-sudo
+      - test-cocoapod
   brew-12-2:
     macos:
       xcode: "12.2.0"
@@ -151,7 +164,7 @@ jobs:
 workflows:
   test-images:
     jobs:
-      - preview-tester-12-5-m
+      - preview-tester-110-12-4-m
       - preview-tester-12-5-m2
       - preview-tester-12-5-m3
       - preview-tester-12-5-m4
