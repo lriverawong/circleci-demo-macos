@@ -81,6 +81,9 @@ commands:
     steps:
       - run:
           name: Check dir
+          command: ls -la ~/
+      - run:
+          name: Check dir
           command: ls -la ~/.cocoapods/
       - run:
           name: Check config
