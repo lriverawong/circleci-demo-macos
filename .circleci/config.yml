@@ -94,13 +94,13 @@ jobs:
       xcode: "110.12.4"
     resource_class: m2.medium
     steps: 
-      # - test-brew
-      # - test-xcode-build
+      - test-brew
+      - test-xcode-build
       - test-sudo
       - test-cocoapod
   preview-tester-12-5-m2:
     macos:
-      xcode: "0.0.125"
+      xcode: "12.5.0"
     resource_class: m2.medium
     steps: 
       - test-brew
@@ -112,8 +112,8 @@ jobs:
       xcode: "12.5.0"
     resource_class: m2.medium
     steps: 
-      # - test-brew
-      # - test-xcode-build
+      - test-brew
+      - test-xcode-build
       - test-sudo
       - test-cocoapod
   preview-tester-12-5-m4:
@@ -121,8 +121,8 @@ jobs:
       xcode: "12.5.0"
     resource_class: m2.medium
     steps: 
-      # - test-brew
-      # - test-xcode-build
+      - test-brew
+      - test-xcode-build
       - test-sudo
       - test-cocoapod
   preview-tester-12-5-l:
@@ -130,8 +130,8 @@ jobs:
       xcode: "12.5.0"
     resource_class: m2.large
     steps: 
-      # - test-brew
-      # - test-xcode-build
+      - test-brew
+      - test-xcode-build
       - test-sudo
       - test-cocoapod
   brew-12-2:
