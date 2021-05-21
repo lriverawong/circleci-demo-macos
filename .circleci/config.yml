@@ -100,11 +100,11 @@ jobs:
       - test-cocoapod
   preview-tester-12-5-m2:
     macos:
-      xcode: "12.5.0"
+      xcode: "0.0.125"
     resource_class: m2.medium
     steps: 
-      # - test-brew
-      # - test-xcode-build
+      - test-brew
+      - test-xcode-build
       - test-sudo
       - test-cocoapod
   preview-tester-12-5-m3:
