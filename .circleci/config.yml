@@ -147,7 +147,7 @@ jobs:
       - test-sudo
       - test-cocoapod
       - test-certs
-  2013-tester-12-5-m:
+  old-2013-tester-12-5-m:
     macos:
       xcode: "12.5.0"
     resource_class: medium
@@ -157,7 +157,7 @@ jobs:
       - test-sudo
       - test-cocoapod
       - test-certs
-  2013-tester-12-5-l:
+  old-2013-tester-12-5-l:
     macos:
       xcode: "12.5.0"
     resource_class: medium
@@ -207,8 +207,8 @@ workflows:
       - preview-tester-12-5-m3
       - preview-tester-12-5-m4
       - preview-tester-12-5-l
-      - 2013-tester-12-5-m
-      - 2013-tester-12-5-l
+      - old-2013-tester-12-5-m
+      - old-2013-tester-12-5-l
       # - brew-12-2
       # - brew-12-0-0
       # - brew-12-0-1
