@@ -88,6 +88,14 @@ commands:
       - run:
           name: Check config
           command: cat ~/.cocoapods/config.yaml
+  test-certs:
+    steps:
+      - run:
+          name: List all certs
+          command: sudo security find-certificate -a
+      - run:
+          name: Check certs - AppleWWDR
+          command: sudo security find-certificate -a -c "Apple Worldwide"
 jobs:
   preview-tester-110-12-4-m:
     macos:
@@ -98,6 +106,7 @@ jobs:
       - test-xcode-build
       - test-sudo
       - test-cocoapod
+      - test-certs
   preview-tester-12-5-m2:
     macos:
       xcode: "12.5.0"
@@ -107,6 +116,7 @@ jobs:
       - test-xcode-build
       - test-sudo
       - test-cocoapod
+      - test-certs
   preview-tester-12-5-m3:
     macos:
       xcode: "12.5.0"
@@ -116,6 +126,7 @@ jobs:
       - test-xcode-build
       - test-sudo
       - test-cocoapod
+      - test-certs
   preview-tester-12-5-m4:
     macos:
       xcode: "12.5.0"
@@ -125,6 +136,7 @@ jobs:
       - test-xcode-build
       - test-sudo
       - test-cocoapod
+      - test-certs
   preview-tester-12-5-l:
     macos:
       xcode: "12.5.0"
@@ -134,6 +146,27 @@ jobs:
       - test-xcode-build
       - test-sudo
       - test-cocoapod
+      - test-certs
+  2013-tester-12-5-m:
+    macos:
+      xcode: "12.5.0"
+    resource_class: medium
+    steps: 
+      - test-brew
+      - test-xcode-build
+      - test-sudo
+      - test-cocoapod
+      - test-certs
+  2013-tester-12-5-l:
+    macos:
+      xcode: "12.5.0"
+    resource_class: medium
+    steps: 
+      - test-brew
+      - test-xcode-build
+      - test-sudo
+      - test-cocoapod
+      - test-certs
   brew-12-2:
     macos:
       xcode: "12.2.0"
@@ -174,6 +207,8 @@ workflows:
       - preview-tester-12-5-m3
       - preview-tester-12-5-m4
       - preview-tester-12-5-l
+      - 2013-tester-12-5-m
+      - 2013-tester-12-5-l
       # - brew-12-2
       # - brew-12-0-0
       # - brew-12-0-1
