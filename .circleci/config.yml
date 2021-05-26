@@ -200,7 +200,7 @@ jobs:
       - test-xcode-build
   brew-11-7:
     macos:
-      xcode: "11.7.0"
+      xcode: "0.0.358"
     resource_class: medium
     steps:
       - test-brew
