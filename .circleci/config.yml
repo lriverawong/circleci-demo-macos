@@ -198,18 +198,26 @@ jobs:
     steps:
       - test-brew
       - test-xcode-build
+  brew-11-7:
+    macos:
+      xcode: "11.7.0"
+    resource_class: medium
+    steps:
+      - test-brew
+      - test-xcode-build
 
 workflows:
   test-images:
     jobs:
-      - preview-tester-110-12-4-m
-      - preview-tester-12-5-m2
-      - preview-tester-12-5-m3
-      - preview-tester-12-5-m4
-      - preview-tester-12-5-l
-      - old-2013-tester-12-5-m
-      - old-2013-tester-12-5-l
+      # - preview-tester-110-12-4-m
+      # - preview-tester-12-5-m2
+      # - preview-tester-12-5-m3
+      # - preview-tester-12-5-m4
+      # - preview-tester-12-5-l
+      # - old-2013-tester-12-5-m
+      # - old-2013-tester-12-5-l
       # - brew-12-2
       # - brew-12-0-0
       # - brew-12-0-1
-      - brew-12-1-1
+      # - brew-12-1-1
+      - brew-11-7
