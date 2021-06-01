@@ -221,11 +221,11 @@ workflows:
       - preview-tester-12-5-m3
       - preview-tester-12-5-m4
       - preview-tester-12-5-l
-      # - old-2013-tester-12-5-m
-      # - old-2013-tester-12-5-l
+      - old-2013-tester-12-5-m
+      - old-2013-tester-12-5-l
       # - brew-12-2
       # - brew-12-0-0
       # - brew-12-0-1
       # - brew-12-1-1
-      - brew-11-7
-      - brew-11-6
+      # - brew-11-7
+      # - brew-11-6
