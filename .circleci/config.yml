@@ -207,7 +207,14 @@ jobs:
       - test-xcode-build
   brew-11-6:
     macos:
-      xcode: "0.0.329"
+      xcode: "11.6.0"
+    resource_class: medium
+    steps:
+      - test-brew
+      - test-xcode-build
+  brew-11-5:
+    macos:
+      xcode: "0.0.296"
     resource_class: medium
     steps:
       - test-brew
@@ -229,3 +236,4 @@ workflows:
       # - brew-12-1-1
       # - brew-11-7
       # - brew-11-6
+      - brew-11-5
