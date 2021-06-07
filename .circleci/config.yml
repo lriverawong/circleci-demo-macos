@@ -90,8 +90,11 @@ commands:
           command: cat ~/.cocoapods/config.yaml
   test-certs:
     steps:
+      - run: 
+          name: List all certs - Distiller
+          command: security find-certificate -a
       - run:
-          name: List all certs
+          name: List all certs - Sudo
           command: sudo security find-certificate -a
       - run:
           name: Check certs - AppleWWDR
@@ -239,4 +242,4 @@ workflows:
       # - brew-12-1-1
       # - brew-11-7
       # - brew-11-6
-      - brew-11-5
+      # - brew-11-5
