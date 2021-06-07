@@ -96,6 +96,9 @@ commands:
       - run:
           name: Check certs - AppleWWDR
           command: sudo security find-certificate -a -c "Apple Worldwide"
+      - run:
+          name: Check expiration dates
+          command: sudo security find-certificate -c "Apple Worldwide Developer Relations Certification Authority" -p | openssl x509 -text | grep "Not After"
 jobs:
   preview-tester-110-12-4-m:
     macos:
