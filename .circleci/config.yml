@@ -265,7 +265,7 @@ jobs:
       - test-xcode-build
   brew-9-4-1:
     macos:
-      xcode: "0.0.188"
+      xcode: "9.4.1"
     resource_class: medium
     steps:
       - test-brew
