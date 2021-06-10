@@ -28,6 +28,8 @@ commands:
       - run: 
           name: Xcode Version
           command: xcodebuild -version
+  test-vmware-tools:
+    steps:
       - run:
           name: VMware Tools CLI
           command: /Library/Application\ Support/VMware\ Tools/vmware-tools-cli -v
@@ -109,6 +111,7 @@ jobs:
     resource_class: m2.medium
     steps: 
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
       - test-sudo
       - test-cocoapod
@@ -119,6 +122,7 @@ jobs:
     resource_class: m2.medium
     steps: 
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
       - test-sudo
       - test-cocoapod
@@ -129,6 +133,7 @@ jobs:
     resource_class: m2.medium
     steps: 
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
       - test-sudo
       - test-cocoapod
@@ -139,6 +144,7 @@ jobs:
     resource_class: m2.medium
     steps: 
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
       - test-sudo
       - test-cocoapod
@@ -149,6 +155,7 @@ jobs:
     resource_class: m2.large
     steps: 
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
       - test-sudo
       - test-cocoapod
@@ -159,6 +166,7 @@ jobs:
     resource_class: medium
     steps: 
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
       - test-sudo
       - test-cocoapod
@@ -169,6 +177,7 @@ jobs:
     resource_class: medium
     steps: 
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
       - test-sudo
       - test-cocoapod
@@ -179,6 +188,7 @@ jobs:
     resource_class: medium
     steps:
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
   brew-12-0-1:
     macos:
@@ -187,6 +197,7 @@ jobs:
     resource_class: medium
     steps:
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
   brew-12-0-0:
     macos:
@@ -194,6 +205,7 @@ jobs:
     resource_class: medium
     steps:
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
   brew-12-1-1:
     macos:
@@ -203,6 +215,7 @@ jobs:
     resource_class: medium
     steps:
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
   brew-11-7:
     macos:
@@ -210,6 +223,7 @@ jobs:
     resource_class: medium
     steps:
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
   brew-11-6:
     macos:
@@ -217,6 +231,7 @@ jobs:
     resource_class: medium
     steps:
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
   brew-11-5:
     macos:
@@ -224,6 +239,7 @@ jobs:
     resource_class: medium
     steps:
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
   brew-10-3:
     macos:
@@ -231,6 +247,7 @@ jobs:
     resource_class: medium
     steps:
       - test-brew
+      - test-vmware-tools
       - test-xcode-build
   brew-10-1:
     macos:
@@ -241,7 +258,14 @@ jobs:
       - test-xcode-build
   brew-11-3-1:
     macos:
-      xcode: "0.0.224"
+      xcode: "11.3.1"
+    resource_class: medium
+    steps:
+      - test-brew
+      - test-xcode-build
+  brew-9-4-1:
+    macos:
+      xcode: "0.0.188"
     resource_class: medium
     steps:
       - test-brew
