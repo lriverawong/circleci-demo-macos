@@ -291,3 +291,4 @@ workflows:
       # - brew-10-3
       # - brew-10-1
       - brew-11-3-1
+      - brew-9-4-1
