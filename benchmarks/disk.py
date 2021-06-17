@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# Based on; https://www.amsys.co.uk/using-command-line-to-benchmark-disks/
+
 import subprocess
 import sys
 
