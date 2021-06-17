@@ -58,6 +58,7 @@ commands:
             name: Install python@3.9
             command: |
                 brew install python@3.9 || true
+                brew link --force python@3.9 || true
         - run:
             name: Run disk speed check
             command: |
@@ -150,6 +151,7 @@ jobs:
       # - test-sudo
       # - test-cocoapod
       # - test-certs
+      - version-info
       - test-disk-io
   preview-tester-12-5-m2:
     macos:
