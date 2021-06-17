@@ -45,15 +45,19 @@ commands:
           command: xcodebuild -version
   test-disk-io:
     steps:
-      - run:
-          name: Benchmark read & write
-          command: |
-              write=$(dd if=/dev/zero bs=2048k of=tstfile count=1024 2>&1 | grep sec | awk '{print $1 / 1024 / 1024 / $5, "MB/sec" }')
-              read=$(dd if=tstfile bs=2048k of=/dev/null count=1024 2>&1 | grep sec | awk '{print $1 / 1024 / 1024 / $5, "MB/sec" }')
-              echo "---------------------"
-              echo "Read Speed is: $read"
-              echo "Write Speed is: $write"
-              echo "---------------------"
+      # - run:
+      #     name: Benchmark read & write
+      #     command: |
+      #         write=$(dd if=/dev/zero bs=2048k of=tstfile count=1024 2>&1 | grep sec | awk '{print $1 / 1024 / 1024 / $5, "MB/sec" }')
+      #         read=$(dd if=tstfile bs=2048k of=/dev/null count=1024 2>&1 | grep sec | awk '{print $1 / 1024 / 1024 / $5, "MB/sec" }')
+      #         echo "---------------------"
+      #         echo "Read Speed is: $read"
+      #         echo "Write Speed is: $write"
+      #         echo "---------------------"
+        - run:
+            name: Run disk speed check
+            command: |
+                python3 benchmarks/disk.py
   test-vmware-tools:
     steps:
       - run:
@@ -335,8 +339,8 @@ jobs:
       xcode: "11.1.0"
     resource_class: medium
     steps:
-      - test-brew
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-11-0-0:
     macos:
       xcode: "11.0.0"
