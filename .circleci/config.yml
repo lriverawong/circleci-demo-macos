@@ -1,6 +1,21 @@
 version: 2.1
 
 commands:
+  version-info:
+    steps:
+      - checkout
+      - run: 
+          name: Brew version
+          command: brew -v
+      - run:
+          name: Version Check
+          command: sw_vers
+      - run:
+          name: Check IP
+          command: ifconfig | grep 'inet '
+      - run: 
+          name: Xcode Version
+          command: xcodebuild -version
   test-brew:
     steps:
       - checkout
@@ -28,6 +43,17 @@ commands:
       - run: 
           name: Xcode Version
           command: xcodebuild -version
+  test-disk-io:
+    steps:
+      - run:
+          name: Benchmark read & write
+          command: |
+              write=$(dd if=/dev/zero bs=2048k of=tstfile count=1024 2>&1 | grep sec | awk '{print $1 / 1024 / 1024 / $5, "MB/sec" }')
+              read=$(dd if=tstfile bs=2048k of=/dev/null count=1024 2>&1 | grep sec | awk '{print $1 / 1024 / 1024 / $5, "MB/sec" }')
+              echo "---------------------"
+              echo "Read Speed is: $read"
+              echo "Write Speed is: $write"
+              echo "---------------------"
   test-vmware-tools:
     steps:
       - run:
@@ -110,103 +136,122 @@ jobs:
       xcode: "110.12.4"
     resource_class: m2.medium
     steps: 
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
-      - test-sudo
-      - test-cocoapod
-      - test-certs
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      # - test-sudo
+      # - test-cocoapod
+      # - test-certs
+      - test-disk-io
   preview-tester-12-5-m2:
     macos:
       xcode: "12.5.0"
     resource_class: m2.medium
     steps: 
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
-      - test-sudo
-      - test-cocoapod
-      - test-certs
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      # - test-sudo
+      # - test-cocoapod
+      # - test-certs
+      - version-info
+      - test-disk-io
   preview-tester-12-5-m3:
     macos:
       xcode: "12.5.0"
     resource_class: m2.medium
     steps: 
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
-      - test-sudo
-      - test-cocoapod
-      - test-certs
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      # - test-sudo
+      # - test-cocoapod
+      # - test-certs
+      - version-info
+      - test-disk-io
   preview-tester-12-5-m4:
     macos:
       xcode: "12.5.0"
     resource_class: m2.medium
     steps: 
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
-      - test-sudo
-      - test-cocoapod
-      - test-certs
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      # - test-sudo
+      # - test-cocoapod
+      # - test-certs
+      - version-info
+      - test-disk-io
   preview-tester-12-5-l:
     macos:
       xcode: "12.5.0"
     resource_class: m2.large
     steps: 
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
-      - test-sudo
-      - test-cocoapod
-      - test-certs
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      # - test-sudo
+      # - test-cocoapod
+      # - test-certs
+      - version-info
+      - test-disk-io
   old-2013-tester-12-5-m:
     macos:
       xcode: "12.5.0"
     resource_class: medium
     steps: 
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
-      - test-sudo
-      - test-cocoapod
-      - test-certs
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      # - test-sudo
+      # - test-cocoapod
+      # - test-certs
+      - version-info
+      - test-disk-io
   old-2013-tester-12-5-l:
     macos:
       xcode: "12.5.0"
     resource_class: medium
     steps: 
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
-      - test-sudo
-      - test-cocoapod
-      - test-certs
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      # - test-sudo
+      # - test-cocoapod
+      # - test-certs
+      - version-info
+      - test-disk-io
   brew-12-2:
     macos:
       xcode: "12.2.0"
     resource_class: medium
     steps:
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-12-0-1:
     macos:
       xcode: "12.0.1" # Should be aliased to 12.0.1
     # xcode: "0.0.393" # Should be aliased to 12.0.1
     resource_class: medium
     steps:
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-12-0-0:
     macos:
       xcode: "12.0.0" # Should be aliased to 12.0.1
     resource_class: medium
     steps:
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-12-1-1:
     macos:
       xcode: "12.1.1" # Should be aliased to 12.1.1
@@ -214,76 +259,77 @@ jobs:
       # xcode: "0.0.405" # Should be aliased to 12.1.1
     resource_class: medium
     steps:
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-11-7:
     macos:
       xcode: "11.7.0"
     resource_class: medium
     steps:
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
+      # - test-brew
+      # - test-vmware-tools
+      # - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-11-6:
     macos:
       xcode: "11.6.0"
     resource_class: medium
     steps:
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-11-5:
     macos:
       xcode: "11.5.0"
     resource_class: medium
     steps:
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-10-3:
     macos:
       xcode: "10.3.0"
     resource_class: medium
     steps:
-      - test-brew
-      - test-vmware-tools
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-10-1:
     macos:
       xcode: "10.1.0"
     resource_class: medium
     steps:
-      - test-brew
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-11-3-1:
     macos:
       xcode: "11.3.1"
     resource_class: medium
     steps:
-      - test-brew
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-9-4-1:
     macos:
       xcode: "9.4.1"
     resource_class: medium
     steps:
-      - test-brew
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-10-0-0:
     macos:
-      xcode: "10.2.1"
+      xcode: "10.0.0"
     resource_class: medium
     steps:
-      - test-brew
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-10-2-1:
     macos:
       xcode: "10.2.1"
     resource_class: medium
     steps:
-      - test-brew
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-11-1-0:
     macos:
       xcode: "11.1.0"
@@ -296,47 +342,47 @@ jobs:
       xcode: "11.0.0"
     resource_class: medium
     steps:
-      - test-brew
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-11-2-1:
     macos:
       xcode: "11.2.1"
     resource_class: medium
     steps:
-      - test-brew
-      - test-xcode-build
+      - version-info
+      - test-disk-io
   brew-11-4-1:
     macos:
       xcode: "11.4.1"
     resource_class: medium
     steps:
-      - test-brew
-      - test-xcode-build
-
+      - version-info
+      - test-disk-io
 
 workflows:
   test-images:
     jobs:
-      # - preview-tester-110-12-4-m
+      - preview-tester-110-12-4-m
       - preview-tester-12-5-m2
       - preview-tester-12-5-m3
       - preview-tester-12-5-m4
       - preview-tester-12-5-l
       - old-2013-tester-12-5-m
       - old-2013-tester-12-5-l
-      # - brew-12-2
-      # - brew-12-0-0
-      # - brew-12-0-1
-      # - brew-12-1-1
-      # - brew-11-7
-      # - brew-11-6
-      # - brew-11-5
-      # - brew-10-3
-      # - brew-10-1
-      # - brew-11-3-1
-      # - brew-9-4-1
-      # - brew-10-0-0
-      # - brew-11-1-0
-      # - brew-11-0-0
+      - brew-12-2
+      - brew-12-0-0
+      - brew-12-0-1
+      - brew-12-1-1
+      - brew-11-7
+      - brew-11-6
+      - brew-11-5
+      - brew-10-3
+      - brew-10-1
+      - brew-11-3-1
+      - brew-9-4-1
+      - brew-10-0-0
+      - brew-10-2-1
+      - brew-11-1-0
+      - brew-11-0-0
       - brew-11-2-1
       - brew-11-4-1
