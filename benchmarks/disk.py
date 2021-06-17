@@ -9,7 +9,7 @@ def check_above_threshold(list1, val):
     return(all(float(x) > float(val) for x in list1))
 
 def main():
-    benchmark_value = float("10000")
+    benchmark_value = float("100")
 
     print("-- Start disk.py --")
     output_arr_write = []
@@ -30,6 +30,7 @@ def main():
         remove_test_file = subprocess.run("rm tstfile", shell=True)
     print("Write speeds (MB/s = %s" % output_arr_write)
     print("Read speeds (MB/s = %s" % output_arr_read)
+    print("Current threshold = %s MB/s" % benchmark_value)
 
     # Check to see if within expectations
     if not check_above_threshold(output_arr_write, benchmark_value):
