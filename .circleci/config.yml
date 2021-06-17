@@ -55,6 +55,10 @@ commands:
       #         echo "Write Speed is: $write"
       #         echo "---------------------"
         - run:
+            name: Install python@3.9
+            command: |
+                brew install python@3.9
+        - run:
             name: Run disk speed check
             command: |
                 python3 benchmarks/disk.py

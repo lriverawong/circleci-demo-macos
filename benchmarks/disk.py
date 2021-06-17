@@ -4,10 +4,10 @@ import subprocess
 import sys
 
 def check_above_threshold(list1, val): 
-    return(all(x > float(val) for x in list1))
+    return(all(float(x) > float(val) for x in list1))
 
 def main():
-    benchmark_value = "100"
+    benchmark_value = float("10000")
 
     print("-- Start disk.py --")
     output_arr_write = []
@@ -30,11 +30,14 @@ def main():
     print("Read speeds (MB/s = %s" % output_arr_read)
 
     # Check to see if within expectations
-    if check_above_threshold(output_arr_write, benchmark_value):
+    if not check_above_threshold(output_arr_write, benchmark_value):
+        if not check_above_threshold(output_arr_read, benchmark_value):
+            print("WRITE & READ : Speed test fails")
+            sys.exit(1)
         print("WRITE : Speed test fail")
         sys.exit(1)
     
-    if check_above_threshold(output_arr_read, benchmark_value):
+    if not check_above_threshold(output_arr_read, benchmark_value):
         print("READ : Speed test fails")
         sys.exit(1)
 
