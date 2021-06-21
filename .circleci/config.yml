@@ -1,6 +1,14 @@
 version: 2.1
 
 commands:
+  download-linux-kernel:
+    steps:
+      - run:
+          name: Download Linux Kernel from Github
+          command: |
+            time git clone git@github.com:torvalds/linux.git linux-kernel
+            du -sh linux-kernel
+
   version-info:
     steps:
       - checkout
@@ -153,6 +161,7 @@ jobs:
       # - test-certs
       - version-info
       - test-disk-io
+      - download-linux-kernel
   preview-tester-12-5-m2:
     macos:
       xcode: "12.5.0"
@@ -166,6 +175,7 @@ jobs:
       # - test-certs
       - version-info
       - test-disk-io
+      - download-linux-kernel
   preview-tester-12-5-m3:
     macos:
       xcode: "12.5.0"
@@ -205,6 +215,7 @@ jobs:
       # - test-certs
       - version-info
       - test-disk-io
+      - download-linux-kernel
   old-2013-tester-12-5-m:
     macos:
       xcode: "12.5.0"
@@ -218,6 +229,7 @@ jobs:
       # - test-certs
       - version-info
       - test-disk-io
+      - download-linux-kernel
   old-2013-tester-12-5-l:
     macos:
       xcode: "12.5.0"
@@ -231,6 +243,7 @@ jobs:
       # - test-certs
       - version-info
       - test-disk-io
+      - download-linux-kernel
   brew-12-2:
     macos:
       xcode: "12.2.0"
@@ -241,6 +254,7 @@ jobs:
       # - test-xcode-build
       - version-info
       - test-disk-io
+      - download-linux-kernel
   brew-12-0-1:
     macos:
       xcode: "12.0.1" # Should be aliased to 12.0.1
@@ -374,25 +388,25 @@ workflows:
     jobs:
       - preview-tester-110-12-4-m
       - preview-tester-12-5-m2
-      - preview-tester-12-5-m3
-      - preview-tester-12-5-m4
+      # - preview-tester-12-5-m3
+      # - preview-tester-12-5-m4
       - preview-tester-12-5-l
       - old-2013-tester-12-5-m
       - old-2013-tester-12-5-l
       - brew-12-2
-      - brew-12-0-0
-      - brew-12-0-1
-      - brew-12-1-1
-      - brew-11-7
-      - brew-11-6
-      - brew-11-5
-      - brew-10-3
-      - brew-10-1
-      - brew-11-3-1
-      # - brew-9-4-1
-      - brew-10-0-0
-      - brew-10-2-1
-      - brew-11-1-0
-      - brew-11-0-0
-      - brew-11-2-1
-      - brew-11-4-1
+      # - brew-12-0-0
+      # - brew-12-0-1
+      # - brew-12-1-1
+      # - brew-11-7
+      # - brew-11-6
+      # - brew-11-5
+      # - brew-10-3
+      # - brew-10-1
+      # - brew-11-3-1
+      # # - brew-9-4-1
+      # - brew-10-0-0
+      # - brew-10-2-1
+      # - brew-11-1-0
+      # - brew-11-0-0
+      # - brew-11-2-1
+      # - brew-11-4-1
