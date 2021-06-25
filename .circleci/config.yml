@@ -382,6 +382,16 @@ jobs:
     steps:
       - version-info
       - test-disk-io
+  brew-13-0-0:
+    macos:
+      xcode: "0.0.13"
+    resource_class: medium
+    steps:
+      - version-info
+      - test-brew
+      - test-vmware-tools
+      - test-xcode-build
+      - test-disk-io
 
 workflows:
   test-images:
@@ -410,3 +420,4 @@ workflows:
       # - brew-11-0-0
       # - brew-11-2-1
       # - brew-11-4-1
+      - brew-13-0-0
